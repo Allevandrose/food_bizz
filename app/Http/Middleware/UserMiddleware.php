@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Redirect; // ✅ Add this
 
 class UserMiddleware
 {
@@ -15,6 +16,6 @@ class UserMiddleware
             return $next($request);
         }
 
-        return redirect('/')->with('error', 'Unauthorized access.');
+        return Redirect::to('/')->with('error', 'Unauthorized access.'); // ✅ Use Redirect::
     }
 }
