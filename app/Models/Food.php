@@ -9,15 +9,15 @@ class Food extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'category_id', 'description', 'price', 'unit','image'];
+    protected $table = 'foods'; // Fix the table name issue
 
-    // A food belongs to one category
+    protected $fillable = ['name', 'category_id', 'description', 'price', 'unit', 'image'];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    // A food can have many orders
     public function orders()
     {
         return $this->hasMany(Order::class);
