@@ -19,11 +19,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-    // Food Management Routes (Admin Only)
-    Route::resource('foods', FoodController::class)->except(['show']);
+    // ✅ Corrected Food Management Routes
+    Route::get('/foods', [FoodController::class, 'index'])->name('foods.index'); // LIST VIEW
+    Route::get('/foods/create', [FoodController::class, 'create'])->name('foods.create'); // CREATE FORM
+    Route::post('/foods', [FoodController::class, 'store'])->name('foods.store'); // STORE FOOD
+    Route::get('/foods/{food}', [FoodController::class, 'show'])->name('foods.show'); // VIEW SINGLE FOOD
+    Route::get('/foods/{food}/edit', [FoodController::class, 'edit'])->name('foods.edit'); // EDIT FORM
+    Route::put('/foods/{food}', [FoodController::class, 'update'])->name('foods.update'); // UPDATE FOOD
+    Route::delete('/foods/{food}', [FoodController::class, 'destroy'])->name('foods.destroy'); // DELETE FOOD
 });
 
 require __DIR__.'/auth.php';

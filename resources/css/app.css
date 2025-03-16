@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "remixicon/fonts/remixicon.css";
+
+
 /* Custom Colors */
 .bg-orange-red {
     background-color: #FF4500; /* Orange-Red Hex Code */

@@ -33,7 +33,7 @@
 </head>
 
 <body class="bg-gray-50">
-    <div x-data="{ open: true }">
+    <div x-data="{ open: true, foodMenuOpen: false }">
         <!-- Sidebar -->
         <aside class="fixed top-0 left-0 h-screen bg-white neumorphic transition-all duration-300 ease-in-out z-50"
             :class="open ? 'w-64' : 'w-20'">
@@ -53,10 +53,28 @@
                     <i class="ri-home-line text-xl text-blue-500"></i>
                     <span class="ml-3 font-medium" x-show="open" x-transition>Home</span>
                 </a>
-                <a href="#" class="flex items-center p-3 rounded-lg neumorphic-hover transition-all">
-                    <i class="ri-information-line text-xl text-green-500"></i>
-                    <span class="ml-3 font-medium" x-show="open" x-transition>About</span>
-                </a>
+                <div class="relative">
+                    <a href="#" @click="foodMenuOpen = !foodMenuOpen" class="flex items-center p-3 rounded-lg neumorphic-hover transition-all">
+                        <i class="ri-restaurant-line text-xl text-green-500"></i>
+                        <span class="ml-3 font-medium" x-show="open" x-transition>Food</span>
+                        <i class="ri-arrow-down-s-line ml-auto text-gray-600" x-show="open"></i>
+                    </a>
+                    <!-- Dropdown Menu -->
+                    <div x-show="foodMenuOpen && open" @click.away="foodMenuOpen = false" class="mt-2 space-y-2 pl-12">
+                        <a href="{{route("admin.foods.create")}}" class="flex items-center p-2 rounded-lg neumorphic-hover transition-all">
+                            <i class="ri-add-circle-line text-lg text-blue-500"></i>
+                            <span class="ml-2 font-medium">Create</span>
+                        </a>
+                        <a href="#" class="flex items-center p-2 rounded-lg neumorphic-hover transition-all">
+                            <i class="ri-eye-line text-lg text-green-500"></i>
+                            <span class="ml-2 font-medium">Show</span>
+                        </a>
+                        <a href="#" class="flex items-center p-2 rounded-lg neumorphic-hover transition-all">
+                            <i class="ri-delete-bin-line text-lg text-red-500"></i>
+                            <span class="ml-2 font-medium">Delete</span>
+                        </a>
+                    </div>
+                </div>
                 <a href="#" class="flex items-center p-3 rounded-lg neumorphic-hover transition-all">
                     <i class="ri-dashboard-line text-xl text-purple-500"></i>
                     <span class="ml-3 font-medium" x-show="open" x-transition>Dashboard</span>
@@ -70,12 +88,14 @@
                     <span class="ml-3 font-medium" x-show="open" x-transition>Profile</span>
                 </a>
             </nav>
-            <!-- Footer -->
+            {{-- footer --}}
             <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100 flex items-center"
                 :class="open ? 'justify-between' : 'justify-center'">
                 <div x-show="open" class="flex items-center space-x-2">
                     <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-                        <span class="text-blue-600 font-bold">JD</span>
+                        <span class="text-blue-600 font-bold">
+                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}{{ strtoupper(substr(Str::afterLast(Auth::user()->name, ' '), 0, 1)) }}
+                        </span>
                     </div>
                     <div>
                         <p class="text-sm font-medium text-gray-700">{{ Auth::user()->name }}</p>
@@ -89,6 +109,7 @@
                     </button>
                 </form>
             </div>
+
         </aside>
         <!-- Main Content -->
         <main class="transition-all duration-300 ease-in-out bg-gray-50 min-h-screen" :class="open ? 'ml-64' : 'ml-20'">
