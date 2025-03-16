@@ -65,7 +65,7 @@
                             <i class="ri-add-circle-line text-lg text-blue-500"></i>
                             <span class="ml-2 font-medium">Create</span>
                         </a>
-                        <a href="#" class="flex items-center p-2 rounded-lg neumorphic-hover transition-all">
+                        <a href="{{route('admin.foods.index')}}" class="flex items-center p-2 rounded-lg neumorphic-hover transition-all">
                             <i class="ri-eye-line text-lg text-green-500"></i>
                             <span class="ml-2 font-medium">Show</span>
                         </a>

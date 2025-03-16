@@ -1,8 +1,10 @@
+@import "remixicon/fonts/remixicon.css";
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import "remixicon/fonts/remixicon.css";
 
 
 /* Custom Colors */
