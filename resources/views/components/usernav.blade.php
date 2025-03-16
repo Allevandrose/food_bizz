@@ -15,17 +15,17 @@
   >
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center py-4">
-        <div class="logo font-bold">
+        <div class="logo font-bold text-2xl">
             FoodBizz
         </div>
         <div class="hidden md:flex space-x-8">
-          <a href="#home" class="hover:text-gray-300">Home</a>
-          <a href="#about" class="hover:text-gray-300">About</a>
-          <a href="#practice" class="hover:text-gray-300"
+          <a href="#home" class="hover:text-orange-500">Home</a>
+          <a href="#about" class="hover:text-orange-500">About</a>
+          <a href="#practice" class="hover:text-orange-500"
             >Practice Areas</a
           >
-          <a href="#values" class="hover:text-gray-300">Values</a>
-          <a href="#contact" class="hover:text-gray-300">Contact</a>
+          <a href="#values" class="hover:text-orange-500">Values</a>
+          <a href="#contact" class="hover:text-orange-500">Contact</a>
         </div>
         <button @click="isOpen = !isOpen" class="md:hidden">
           <svg
@@ -43,16 +43,16 @@
           </svg>
         </button>
       </div>
-      <div x-show="isOpen" class="md:hidden pb-4 space-y-4 text-center">
-        <a href="#home" class="block py-2 hover:bg-[#5a105e]">Home</a>
-        <a href="#about" class="block py-2 hover:bg-[#5a105e]">About</a>
-        <a href="#practice" class="block py-2 hover:bg-[#5a105e]"
+      <div x-show="isOpen" class="md:hidden pb-4 space-y-4 text-center bg-orange-600">
+        <a href="#home" class="block py-2 text-white hover:bg-orange-700">Home</a>
+        <a href="#about" class="block py-2 text-white hover:bg-orange-700">About</a>
+        <a href="#practice" class="block py-2 text-white hover:bg-orange-700"
           >Practice Areas</a
         >
-        <a href="#values" class="block py-2 hover:bg-[#5a105e]"
+        <a href="#values" class="block py-2 text-white hover:bg-orange-700"
           >Values</a
         >
-        <a href="#contact" class="block py-2 hover:bg-[#5a105e]"
+        <a href="#contact" class="block py-2 text-white hover:bg-orange-700"
           >Contact</a
         >
       </div>
