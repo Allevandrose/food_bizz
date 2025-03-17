@@ -7,6 +7,7 @@
     <title>Food-Bizz</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -49,7 +50,7 @@
             </div>
             <!-- Navigation Links -->
             <nav class="p-3 space-y-3">
-                <a href="#" class="flex items-center p-3 rounded-lg neumorphic-hover transition-all">
+                <a href="{{route('admin.dashboard')}}" class="flex items-center p-3 rounded-lg neumorphic-hover transition-all">
                     <i class="ri-home-line text-xl text-blue-500"></i>
                     <span class="ml-3 font-medium" x-show="open" x-transition>Home</span>
                 </a>

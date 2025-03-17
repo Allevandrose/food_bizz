@@ -43,13 +43,11 @@ class FoodController extends Controller
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'unit' => 'required|integer|min:1',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         // ✅ Find or create category
         $category = Category::firstOrCreate(['name' => $validated['category']]);
-
-        // ✅ Assign category ID and remove category name from input
         $validated['category_id'] = $category->id;
         unset($validated['category']);
 

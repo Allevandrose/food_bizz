@@ -1,3 +1,4 @@
+{{-- Updated index blade with Update and Delete buttons --}}
 <x-side>
     <div class="container mx-auto p-4">
         <h1 class="text-3xl font-bold mb-6 text-[#2a2a2a] font-merriweather">Our Menu</h1>
@@ -40,11 +41,19 @@
                             </div>
                         </div>
 
-                        <button class="mt-4 mx-auto block w-2/3 bg-[#ff4500] hover:bg-[#e03d00] text-white px-4 py-2 rounded-lg 
-                                font-medium text-sm tracking-wide transition-all duration-300 transform hover:scale-95 
-                                shadow-md hover:shadow-lg">
-                            Add to cart
-                        </button>
+                        <div class="flex justify-between mt-4">
+                            <a href="{{ route('admin.foods.edit', $food->id) }}"
+                                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md">
+                                Update
+                            </a>
+                            <form action="{{ route('admin.foods.destroy', $food->id) }}" method="POST" class="delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow-md">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             @endforeach
@@ -52,3 +61,27 @@
         {{ $foods->links() }}
     </div>
 </x-side>
+
+{{-- SweetAlert for Delete Confirmation --}}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".delete-form").forEach(form => {
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
