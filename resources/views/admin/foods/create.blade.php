@@ -50,7 +50,7 @@
 
             {{-- Unit --}}
             <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2">Unit (e.g., 1 piece, 500g)</label>
+                <label class="block text-gray-700 font-bold mb-2">Units available</label>
                 <input type="number" name="unit" class="w-full p-2 border rounded-lg" value="{{ old('unit') }}" required min="1">
             </div>
 
