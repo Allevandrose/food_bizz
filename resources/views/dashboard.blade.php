@@ -25,33 +25,27 @@
 
 <body class="font-sans" x-data="{ sidebarOpen: false }">
 
-    <!-- 📌 Mobile Sidebar Toggle -->
-    <button @click="sidebarOpen = !sidebarOpen" 
-        class="md:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-lg">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-    </button>
+    <div class="flex">
+        <!-- 📌 Sidebar -->
+        <x-sidebar />
 
-    <!-- 📌 Sidebar -->
-    <x-sidebar />
+        <!-- 📌 Main Content -->
+        <div class="flex-1 md:ml-64 p-6 z-20 relative">
+            <!-- Hero Section -->
+            <x-hero />
 
-    <!-- 📌 Main Content -->
-    <div class="md:ml-64 p-6 z-20">
-        <!-- Hero Section -->
-        <x-hero />
+            <!-- About Section -->
+            <x-about />
 
-        <!-- About Section -->
-        <x-about />
+            <!-- Featured Foods -->
+            <x-feature />
 
-        <!-- Featured Foods -->
-        <x-feature />
+            <!-- Menu -->
+            <x-menu :foods="$foods" />
 
-        <!-- Menu -->
-        <x-menu :foods="$foods" />
-
-        <!-- Footer -->
-        <x-footer />
+            <!-- Footer -->
+            <x-footer />
+        </div>
     </div>
 
     <!-- 📌 Scripts -->
