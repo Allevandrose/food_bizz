@@ -64,15 +64,15 @@
                     <div x-show="foodMenuOpen && open" @click.away="foodMenuOpen = false" class="mt-2 space-y-2 pl-12">
                         <a href="{{route("admin.foods.create")}}" class="flex items-center p-2 rounded-lg neumorphic-hover transition-all">
                             <i class="ri-add-circle-line text-lg text-blue-500"></i>
-                            <span class="ml-2 font-medium">Create</span>
+                            <span class="ml-2 font-medium">Create Food</span>
                         </a>
                         <a href="{{route('admin.foods.index')}}" class="flex items-center p-2 rounded-lg neumorphic-hover transition-all">
                             <i class="ri-eye-line text-lg text-green-500"></i>
-                            <span class="ml-2 font-medium">Show</span>
+                            <span class="ml-2 font-medium">Show Food</span>
                         </a>
-                        <a href="#" class="flex items-center p-2 rounded-lg neumorphic-hover transition-all">
-                            <i class="ri-delete-bin-line text-lg text-red-500"></i>
-                            <span class="ml-2 font-medium">Delete</span>
+                        <a href="{{route('admin.categories.create')}}" class="flex items-center p-2 rounded-lg neumorphic-hover transition-all">
+                            <i class="ri-list-check-2 text-lg text-green-500"></i>
+                            <span class="ml-2 font-medium">Category</span>
                         </a>
                     </div>
                 </div>
