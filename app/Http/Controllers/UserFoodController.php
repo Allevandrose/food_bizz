@@ -3,63 +3,58 @@
 namespace App\Http\Controllers;
 
 use App\Models\Food;
+use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserFoodController extends Controller
 {
     public function __construct()
     {
-        // Apply 'auth' middleware only to the addToCart method
         $this->middleware('auth')->only('addToCart');
     }
 
-    /**
-     * Display a listing of all food items for users.
-     */
     public function index()
     {
         $foods = Food::paginate(10);
         return view('user.foods.index', compact('foods'));
     }
 
-    /**
-     * Display a specific food item in detail.
-     */
     public function show(Food $food)
     {
         return view('user.foods.show', compact('food'));
     }
 
-    /**
-     * Add a food item to the user's cart.
-     */
     public function addToCart(Request $request, Food $food)
     {
-        $cart = session()->get('cart', []);
-        $requestedQuantity = max(1, (int) $request->input('quantity', 1)); // Ensure minimum is 1
+        $user = Auth::user();
+        $quantity = max(1, (int) $request->input('quantity', 1)); // Ensure minimum quantity is 1
 
-        // Get current quantity in the cart
-        $currentCartQuantity = $cart[$food->id]['quantity'] ?? 0;
-        $newTotalQuantity = $currentCartQuantity + $requestedQuantity;
+        // Check if the item is already in the cart
+        $cartItem = Cart::where('user_id', $user->id)
+                        ->where('food_id', $food->id)
+                        ->first();
 
-        // Ensure total quantity does not exceed available stock
-        if ($newTotalQuantity > $food->unit) {
-            return redirect()->back()->with('error', 'Not enough stock available.');
-        }
-
-        // Add or update cart item
-        if (isset($cart[$food->id])) {
-            $cart[$food->id]['quantity'] = $newTotalQuantity;
+        if ($cartItem) {
+            // Update quantity if item exists
+            $newQuantity = $cartItem->quantity + $quantity;
+            if ($newQuantity > $food->unit) {
+                return redirect()->back()->with('error', 'Not enough stock available.');
+            }
+            $cartItem->quantity = $newQuantity;
+            $cartItem->save();
         } else {
-            $cart[$food->id] = [
-                'name' => $food->name,
-                'price' => $food->price,
-                'quantity' => $requestedQuantity,
-                'image' => $food->image,
-            ];
+            // Add new item to cart
+            if ($quantity > $food->unit) {
+                return redirect()->back()->with('error', 'Not enough stock available.');
+            }
+            Cart::create([
+                'user_id' => $user->id,
+                'food_id' => $food->id,
+                'quantity' => $quantity,
+            ]);
         }
 
-        session()->put('cart', $cart);
         return redirect()->back()->with('success', 'Food added to cart successfully.');
     }
 }

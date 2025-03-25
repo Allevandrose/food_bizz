@@ -25,7 +25,7 @@
                 <div class="hidden md:flex items-center space-x-6">
                     <a href="{{route('dashboard')}}" class="hover:text-orange-500">Home</a>
                     <a href="{{route('foods.index')}}" class="hover:text-orange-500">Menu</a>
-                    <a href="#practice" class="hover:text-orange-500">Practice Areas</a>
+                    <a href="{{route('cart.index')}}" class="hover:text-orange-500">Cart</a>
                     <a href="#values" class="hover:text-orange-500">Values</a>
 
                     <!-- Minimized Logout Button -->

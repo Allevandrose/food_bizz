@@ -61,11 +61,11 @@
 
             <!-- 📌 Sidebar Extra Options -->
             <div class="mt-10 space-y-2">
-                <div class="p-3 rounded-lg neu-button bg-white cursor-pointer">
-                    <a href="{{ route('foods.index') }}">
+                <a href="{{ route('foods.index') }}">
+                    <div class="p-3 rounded-lg neu-button bg-white cursor-pointer">
                         <span class="text-gray-700">Menu</span>
-                    </a>
-                </div>
+                    </div>
+                </a>
                 <div class="p-3 rounded-lg neu-button bg-white cursor-pointer">
                     <span class="text-gray-700">My Account</span>
                 </div>
