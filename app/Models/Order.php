@@ -3,6 +3,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Order extends Model
 {
@@ -31,9 +32,9 @@ class Order extends Model
     protected static function boot()
     {
         parent::boot();
-        static::created(function ($order) {
-            $order->order_number = 'FB-' . str_pad($order->id, 3, '0', STR_PAD_LEFT);
-            $order->save();
+
+        static::creating(function ($order) {
+            $order->order_number = 'FB-' . Str::uuid()->toString();
         });
     }
 }
