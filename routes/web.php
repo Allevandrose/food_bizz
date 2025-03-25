@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\CartController;
@@ -7,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\UserFoodController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,6 +21,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post('/submit-order', [OrderController::class, 'store'])->name('order.store');
+    Route::get('/order/{order}/pay', [OrderController::class, 'payWithStripe'])->name('order.pay');
+    Route::get('/order/{order}/success', [OrderController::class, 'paymentSuccess'])->name('order.success');
+    Route::get('/order/{order}/cancel', [OrderController::class, 'paymentCancel'])->name('order.cancel');
+    Route::get('/order/{order}/confirmation', [OrderController::class, 'confirmation'])->name('order.confirmation');
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {

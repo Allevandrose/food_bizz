@@ -1,5 +1,5 @@
 <?php
-
+// database/migrations/xxxx_xx_xx_create_orders_table.php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -9,11 +9,15 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Links to users table
-            $table->foreignId('food_id')->constrained('foods')->onDelete('cascade'); // Links to foods table
-            $table->integer('quantity'); // Quantity of the food ordered
-            $table->enum('payment_method', ['cash', 'stripe']); // Payment method
-            $table->enum('status', ['pending', 'paid', 'failed'])->default('pending'); // Order status
+            $table->string('order_number')->unique(); // Unique order ID like FB-001
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('delivery_name');
+            $table->string('delivery_email');
+            $table->string('delivery_phone');
+            $table->string('delivery_location'); // New location field
+            $table->enum('payment_method', ['cash', 'stripe']);
+            $table->enum('status', ['pending', 'paid', 'failed'])->default('pending');
+            $table->decimal('total_amount', 8, 2); // Total order amount
             $table->timestamps();
         });
     }

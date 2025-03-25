@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,7 +8,7 @@ class Food extends Model
 {
     use HasFactory;
 
-    protected $table = 'foods'; // Fix the table name issue
+    protected $table = 'foods';
 
     protected $fillable = ['name', 'category_id', 'description', 'price', 'unit', 'image'];
 
@@ -18,8 +17,8 @@ class Food extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function orders()
+    public function orderItems()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(OrderItem::class);
     }
 }
