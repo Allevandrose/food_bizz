@@ -11,6 +11,6 @@
     <p><strong>Total Amount:</strong> Kes. {{ number_format($order->total_amount, 2) }}</p>
     <p>Your order will be delivered to: {{ $order->delivery_location }}</p>
     <p>We appreciate your business!</p>
-    <p>Best regards,<br>Your Company Name</p>
+    <p>Best regards,<br>{{config('app.name')}}</p>
 </body>
 </html>
