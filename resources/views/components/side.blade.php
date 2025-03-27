@@ -84,7 +84,7 @@
                     <i class="ri-line-chart-line text-xl text-red-500"></i>
                     <span class="ml-3 font-medium" x-show="open" x-transition>Analytics</span>
                 </a>
-                <a href="#" class="flex items-center p-3 rounded-lg neumorphic-hover transition-all">
+                <a href="{{route('profile.edit')}}" class="flex items-center p-3 rounded-lg neumorphic-hover transition-all">
                     <i class="ri-user-line text-xl text-yellow-500"></i>
                     <span class="ml-3 font-medium" x-show="open" x-transition>Profile</span>
                 </a>

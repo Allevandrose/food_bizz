@@ -66,19 +66,21 @@
                         <span class="text-gray-700">Menu</span>
                     </div>
                 </a>
-                <div class="p-3 rounded-lg neu-button bg-white cursor-pointer">
-                    <span class="text-gray-700">My Account</span>
-                </div>
-                <div class="p-3 rounded-lg neu-button bg-white cursor-pointer">
-                    <span class="text-gray-700">Order History</span>
-                </div>
-                <div class="p-3 rounded-lg neu-button bg-white cursor-pointer">
-                    <span class="text-gray-700">Wishlist</span>
-                </div>
-                <div class="p-3 rounded-lg neu-button bg-white cursor-pointer">
-                    <span class="text-gray-700">Settings</span>
-                </div>
-
+                <a href="{{ route('orders.index') }}">
+                    <div class="p-3 rounded-lg neu-button bg-white cursor-pointer">
+                        <span class="text-gray-700">My Orders</span>
+                    </div>
+                </a>
+                <a href="{{ route('cart.index') }}">
+                    <div class="p-3 rounded-lg neu-button bg-white cursor-pointer">
+                        <span class="text-gray-700">Cart</span>
+                    </div>
+                </a>
+                <a href="{{ route('profile.edit') }}">
+                    <div class="p-3 rounded-lg neu-button bg-white cursor-pointer">
+                        <span class="text-gray-700">Profile</span>
+                    </div>
+                </a>
                 <!-- 📌 Logout -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

@@ -26,7 +26,7 @@
                     <a href="{{route('dashboard')}}" class="hover:text-orange-500">Home</a>
                     <a href="{{route('foods.index')}}" class="hover:text-orange-500">Menu</a>
                     <a href="{{route('cart.index')}}" class="hover:text-orange-500">Cart</a>
-                    <a href="#values" class="hover:text-orange-500">Values</a>
+                    <a href="{{route('orders.index')}}" class="hover:text-orange-500">Orders</a>
 
                     <!-- Minimized Logout Button -->
                     <form method="POST" action="{{ route('logout') }}">
