@@ -49,16 +49,16 @@
 
             <!-- Mobile Menu -->
             <div x-show="isOpen" class="md:hidden pb-4 space-y-4 text-center bg-orange-600">
-                <a href="#home" class="block py-2 text-white hover:bg-orange-700">Home</a>
-                <a href="#about" class="block py-2 text-white hover:bg-orange-700">About</a>
-                <a href="#practice" class="block py-2 text-white hover:bg-orange-700">Practice Areas</a>
-                <a href="#values" class="block py-2 text-white hover:bg-orange-700">Values</a>
+                <a href="{{route('dashboard')}}" class="block py-2 text-white hover:bg-orange-700">Home</a>
+                <a href="{{route('foods.index')}}" class="block py-2 text-white hover:bg-orange-700">Menu</a>
+                <a href="{{route('cart.index')}}" class="block py-2 text-white hover:bg-orange-700">Cart</a>
+                <a href="{{route('orders.index')}}" class="block py-2 text-white hover:bg-orange-700">Orders</a>
 
                 <!-- Logout Button in Mobile -->
                 <form method="POST" action="{{ route('logout') }}" class="block">
                     @csrf
                     <button type="submit"
-                        class="w-full border border-white text-white px-4 py-2 rounded-md text-sm transition duration-300 hover:bg-white hover:text-orange-600">
+                        class="w-full border border-white text-white px-4 py-2  text-sm transition duration-300 hover:bg-white hover:text-orange-600">
                         Logout
                     </button>
                 </form>
