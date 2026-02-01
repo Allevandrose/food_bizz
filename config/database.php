@@ -58,9 +58,11 @@ return [
             'strict' => true,
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA', '/etc/ssl/certs/ca-certificates.crt'),
-                // Add this line below to fix the "certificate verify failed" error:
-                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
+                // This points to the ca.pem file you downloaded and placed in storage/certs/
+                PDO::MYSQL_ATTR_SSL_CA => storage_path('certs/ca.pem'),
+
+                // This ensures the server certificate is verified against the CA file above
+                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => true,
             ]) : [],
         ],
 
