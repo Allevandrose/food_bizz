@@ -743,8 +743,8 @@
                 FoodBizz
             </a>
             <div class="nav-actions">
-                <a href="#register" class="nav-btn btn-register">Register</a>
-                <a href="#login" class="nav-btn btn-login">Login</a>
+                <a href="{{ route('register') }}" class="nav-btn btn-register">Register</a>
+                <a href="{{ route('login') }}" class="nav-btn btn-login">Login</a>
             </div>
             <div class="menu-toggle" id="menuToggle">
                 <i class="ri-menu-line" style="font-size: 1.8rem; color: var(--dark-color);"></i>
@@ -753,8 +753,8 @@
         <!-- Mobile Menu -->
         <div class="mobile-menu" id="mobileMenu">
             <div class="mobile-menu-content">
-                <a href="#register" class="mobile-menu-btn btn-register">Register</a>
-                <a href="#login" class="mobile-menu-btn btn-login">Login</a>
+                <a href="{{ route('register') }}" class="mobile-menu-btn btn-register">Register</a>
+                <a href="{{ route('login') }}" class="mobile-menu-btn btn-login">Login</a>
             </div>
         </div>
     </nav>
