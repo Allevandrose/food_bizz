@@ -16,10 +16,7 @@
     <!-- Include Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
     <style>
-        /* --- ORIGINAL CSS START --- */
         * {
             margin: 0;
             padding: 0;
@@ -44,6 +41,7 @@
             overflow-x: hidden;
         }
 
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -82,94 +80,81 @@
             font-size: 2rem;
         }
 
-        .nav-links {
+        .nav-actions {
             display: flex;
-            gap: 2.5rem;
-            list-style: none;
+            gap: 1rem;
             align-items: center;
         }
 
-        .nav-links a {
-            color: var(--dark-color);
+        .nav-btn {
+            padding: 0.7rem 1.8rem;
+            border-radius: 8px;
+            font-weight: 600;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            border: 2px solid var(--primary-color);
         }
 
-        .nav-links a:hover {
+        .btn-login {
             color: var(--primary-color);
+            background: transparent;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
+        .btn-login:hover {
             background: var(--primary-color);
-            transition: width 0.3s;
+            color: white;
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        .btn-register {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
         }
 
-        /* --- SUPPORT FOR TAILWIND CLASSES USED IN YOUR SNIPPET --- */
-        .hidden { display: none; }
-        .sm\:flex { display: flex; }
-        .sm\:items-center { align-items: center; }
-        .sm\:ms-6 { margin-left: 1.5rem; }
-        
-        .flex { display: flex; }
-        .items-center { align-items: center; }
-        .space-x-4 > * + * { margin-left: 1rem; }
-        
-        .text-sm { font-size: 0.875rem; }
-        .font-medium { font-weight: 500; }
-        
-        /* Colors mapped to Tailwind palette used in snippet */
-        .text-gray-700 { color: #374151; }
-        .text-gray-600 { color: #4B5563; }
-        .text-orange-600 { color: #ea580c; }
-        
-        .bg-orange-600 { background-color: #ea580c; }
-        .hover\:bg-orange-600:hover { background-color: #ea580c; }
-        .hover\:bg-orange-700:hover { background-color: #c2410c; }
-        
-        .border { border-width: 1px; }
-        .border-orange-600 { border-color: #ea580c; }
-        .rounded-md { border-radius: 0.375rem; }
-        
-        .px-4 { padding-left: 1rem; padding-right: 1rem; }
-        .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
-        .transition { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
-        .duration-300 { transition-duration: 300ms; }
-
-        /* Form button reset */
-        form button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font: inherit;
+        .btn-register:hover {
+            background: #e55a2a;
+            border-color: #e55a2a;
         }
 
         .menu-toggle {
             display: none;
-            flex-direction: column;
             cursor: pointer;
-            gap: 5px;
         }
 
-        .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: var(--dark-color);
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            background: white;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .mobile-menu-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
             transition: all 0.3s;
-            border-radius: 3px;
+            font-size: 1rem;
+            text-align: center;
+            border: 2px solid var(--primary-color);
+            display: block;
         }
 
+        /* Container */
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -652,10 +637,6 @@
 
         /* Responsive Design */
         @media (max-width: 1024px) {
-            .nav-links {
-                gap: 1.5rem;
-            }
-
             .left .heading h1 {
                 font-size: 3rem;
             }
@@ -667,44 +648,11 @@
 
         @media (max-width: 768px) {
             .menu-toggle {
-                display: flex;
+                display: block;
             }
 
-            .nav-links {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background: white;
-                flex-direction: column;
-                justify-content: flex-start;
-                padding: 2rem;
-                transition: left 0.3s;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            }
-
-            .nav-links.active {
-                left: 0;
-            }
-
-            /* Mobile Auth Container */
-            .mobile-auth-container {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                margin-top: 1rem;
-                gap: 1rem;
-            }
-
-            .mobile-auth-container .flex {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .mobile-auth-container .space-x-4 > * + * {
-                margin-left: 0;
-                margin-top: 1rem;
+            .nav-actions {
+                display: none;
             }
 
             .welcome,
@@ -741,12 +689,6 @@
 
             .footer-sections {
                 grid-template-columns: 1fr;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .mobile-auth-container {
-                display: none;
             }
         }
 
@@ -800,71 +742,19 @@
                 <i class="fas fa-utensils"></i>
                 FoodBizz
             </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#menu">Menu</a></li>
-                <li><a href="#contact">Contact</a></li>
-                
-                <!-- IMPLEMENTED SNIPPET: Desktop View -->
-                <div class="hidden sm:flex sm:items-center sm:ms-6">
-                    @if (Route::has('login'))
-                        <div class="flex items-center space-x-4">
-                            @auth
-                                <a href="{{ url('/dashboard') }}" class="text-sm font-medium text-gray-700 hover:text-orange-600 transition">Dashboard</a>
-                                
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-orange-600 transition">
-                                        Log Out
-                                    </button>
-                                </form>
-                            @else
-                                <a href="{{ route('login') }}" class="px-4 py-2 text-sm font-medium text-orange-600 border border-orange-600 rounded-md hover:bg-orange-600 hover:text-white transition duration-300">
-                                    Login
-                                </a>
-
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="px-4 py-2 text-sm font-medium text-white bg-orange-600 rounded-md hover:bg-orange-700 transition duration-300">
-                                        Register
-                                    </a>
-                                @endif
-                            @endauth
-                        </div>
-                    @endif
-                </div>
-
-                <!-- DUPLICATE FOR MOBILE (To ensure functionality works inside the hamburger menu) -->
-                <div class="mobile-auth-container">
-                    @if (Route::has('login'))
-                        <div class="flex items-center space-x-4">
-                            @auth
-                                <a href="{{ url('/dashboard') }}" class="text-sm font-medium text-gray-700 hover:text-orange-600 transition">Dashboard</a>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-orange-600 transition">
-                                        Log Out
-                                    </button>
-                                </form>
-                            @else
-                                <a href="{{ route('login') }}" class="px-4 py-2 text-sm font-medium text-orange-600 border border-orange-600 rounded-md hover:bg-orange-600 hover:text-white transition duration-300 text-center">
-                                    Login
-                                </a>
-
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="px-4 py-2 text-sm font-medium text-white bg-orange-600 rounded-md hover:bg-orange-700 transition duration-300 text-center">
-                                        Register
-                                    </a>
-                                @endif
-                            @endauth
-                        </div>
-                    @endif
-                </div>
-            </ul>
+            <div class="nav-actions">
+                <a href="#register" class="nav-btn btn-register">Register</a>
+                <a href="#login" class="nav-btn btn-login">Login</a>
+            </div>
             <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
+                <i class="ri-menu-line" style="font-size: 1.8rem; color: var(--dark-color);"></i>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-content">
+                <a href="#register" class="mobile-menu-btn btn-register">Register</a>
+                <a href="#login" class="mobile-menu-btn btn-login">Login</a>
             </div>
         </div>
     </nav>
@@ -891,8 +781,7 @@
                 </div>
                 <div class="right">
                     <div class="image parallax">
-                        <!-- Original Image Preserved -->
-                        <img src="{{asset('assets/images/food.png')}}" alt="Delicious food illustration" />
+                        <img src="assets/images/food.png" alt="Delicious food illustration" />
                     </div>
                 </div>
             </div>
@@ -916,23 +805,23 @@
                 <div class="right">
                     <div class="cards">
                         <div class="card-top">
-                            <div class="card" data-aos="zoom-in">
-                                <h4>Fresh Ingredients</h4>
+                            <div class="card" data-aos="zoom-in" data-aos-delay="100">
+                                <h4><i class="fas fa-leaf"></i> Fresh Ingredients</h4>
                                 <p>We source only the best, freshest ingredients for our dishes.</p>
                             </div>
-                            <div class="card" data-aos="zoom-in">
-                                <h4>Expert Chefs</h4>
+                            <div class="card" data-aos="zoom-in" data-aos-delay="200">
+                                <h4><i class="fas fa-user-tie"></i> Expert Chefs</h4>
                                 <p>Our skilled chefs craft every meal with precision and love.</p>
                             </div>
                         </div>
                         <div class="card-bottom">
-                            <div class="card" data-aos="zoom-in">
-                                <h4>Fast Delivery</h4>
+                            <div class="card" data-aos="zoom-in" data-aos-delay="300">
+                                <h4><i class="fas fa-shipping-fast"></i> Fast Delivery</h4>
                                 <p>Get your food delivered hot and fresh, right to your door.</p>
                             </div>
-                            <div class="card" data-aos="zoom-in">
-                                <h4>Great Taste</h4>
-                                <p>Every bite is a burst of flavor you’ll never forget.</p>
+                            <div class="card" data-aos="zoom-in" data-aos-delay="400">
+                                <h4><i class="fas fa-heart"></i> Great Taste</h4>
+                                <p>Every bite is a burst of flavor you'll never forget.</p>
                             </div>
                         </div>
                     </div>
@@ -941,12 +830,16 @@
         </section>
 
         <!-- Products Section -->
-        <div class="products" id="menu">
+        <section class="products" id="menu">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Our Delicious Menu</h2>
+                <p>Explore our mouth-watering selection of dishes</p>
+            </div>
             <div class="products-content">
                 <div class="menu-cardss">
-                    <div class="menu-card" data-aos="fade-up">
+                    <div class="menu-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="image">
-                            <img src="{{asset('assets/images/pizza.jpeg')}}" alt="Classic Margherita Pizza" />
+                            <img src="assets/images/pizza.jpeg" alt="Classic Margherita Pizza" />
                         </div>
                         <div class="content">
                             <div class="details">
@@ -955,12 +848,12 @@
                                 <div><span class="title">Description:</span>Fresh tomatoes, mozzarella, and basil.
                                 </div>
                             </div>
-                            <button>Add to Cart</button>
+                            <button><i class="fas fa-shopping-cart"></i> Add to Cart</button>
                         </div>
                     </div>
-                    <div class="menu-card" data-aos="fade-up">
+                    <div class="menu-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="image">
-                            <img src="{{asset('assets/images/mobile_banner1.jpeg')}}" alt="Spicy Egg Scramble" />
+                            <img src="assets/images/mobile_banner1.jpeg" alt="Spicy Egg Scramble" />
                         </div>
                         <div class="content">
                             <div class="details">
@@ -968,12 +861,12 @@
                                 <div><span class="title">Price:</span>Ks. 300</div>
                                 <div><span class="title">Description:</span>Scrambled eggs with a kick of spice.</div>
                             </div>
-                            <button>Add to Cart</button>
+                            <button><i class="fas fa-shopping-cart"></i> Add to Cart</button>
                         </div>
                     </div>
-                    <div class="menu-card" data-aos="fade-up">
+                    <div class="menu-card" data-aos="fade-up" data-aos-delay="300">
                         <div class="image">
-                            <img src="{{asset('assets/images/food.png')}}" alt="Grilled Chicken" />
+                            <img src="assets/images/food.png" alt="Grilled Chicken" />
                         </div>
                         <div class="content">
                             <div class="details">
@@ -981,12 +874,12 @@
                                 <div><span class="title">Price:</span>Ks. 400</div>
                                 <div><span class="title">Description:</span>Juicy chicken with herbs.</div>
                             </div>
-                            <button>Add to Cart</button>
+                            <button><i class="fas fa-shopping-cart"></i> Add to Cart</button>
                         </div>
                     </div>
-                    <div class="menu-card" data-aos="fade-up">
+                    <div class="menu-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="image">
-                            <img src="{{asset('assets/images/food1.png')}}" alt="Pasta Primavera" />
+                            <img src="assets/images/food1.png" alt="Pasta Primavera" />
                         </div>
                         <div class="content">
                             <div class="details">
@@ -994,12 +887,12 @@
                                 <div><span class="title">Price:</span>Ks. 350</div>
                                 <div><span class="title">Description:</span>Fresh veggies and pasta.</div>
                             </div>
-                            <button>Add to Cart</button>
+                            <button><i class="fas fa-shopping-cart"></i> Add to Cart</button>
                         </div>
                     </div>
-                    <div class="menu-card" data-aos="fade-up">
+                    <div class="menu-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="image">
-                            <img src="{{asset('assets/images/food2.png')}}" alt="Burger Deluxe" />
+                            <img src="assets/images/food2.png" alt="Burger Deluxe" />
                         </div>
                         <div class="content">
                             <div class="details">
@@ -1007,12 +900,12 @@
                                 <div><span class="title">Price:</span>Ks. 450</div>
                                 <div><span class="title">Description:</span>Beef patty with all the fixings.</div>
                             </div>
-                            <button>Add to Cart</button>
+                            <button><i class="fas fa-shopping-cart"></i> Add to Cart</button>
                         </div>
                     </div>
-                    <div class="menu-card" data-aos="fade-up">
+                    <div class="menu-card" data-aos="fade-up" data-aos-delay="300">
                         <div class="image">
-                            <img src="{{asset('assets/images/food3.png')}}" alt="Chocolate Dessert" />
+                            <img src="assets/images/food3.png" alt="Chocolate Dessert" />
                         </div>
                         <div class="content">
                             <div class="details">
@@ -1020,15 +913,15 @@
                                 <div><span class="title">Price:</span>Ks. 550</div>
                                 <div><span class="title">Description:</span>Rich and creamy chocolate treat.</div>
                             </div>
-                            <button>Add to Cart</button>
+                            <button><i class="fas fa-shopping-cart"></i> Add to Cart</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Contact Section -->
-        <div class="contact" id="contact">
+        <section class="contact" id="contact">
             <div class="contact-content">
                 <div class="form" data-aos="fade-up">
                     <form>
@@ -1051,7 +944,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Footer -->
         <footer class="footer" data-aos="fade-up">
@@ -1080,10 +973,10 @@
                     <div class="footer-section" data-aos="fade-up">
                         <h3 class="section-title">Quick Links</h3>
                         <ul class="quick-links">
-                            <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                            <li><a href="#"><i class="fas fa-chevron-right"></i> Menu</a></li>
-                            <li><a href="#"><i class="fas fa-chevron-right"></i> Promotions</a></li>
-                            <li><a href="#"><i class="fas fa-chevron-right"></i> Careers</a></li>
+                            <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                            <li><a href="#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                            <li><a href="#menu"><i class="fas fa-chevron-right"></i> Menu</a></li>
+                            <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
                         </ul>
                     </div>
 
@@ -1115,17 +1008,18 @@
         </footer>
     </div>
 
-    <!-- Scripts -->
+    <!-- AOS and Custom Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         // Initialize AOS
         AOS.init({
             duration: 1000,
             once: true,
+            offset: 100
         });
 
         // Parallax Effect
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const parallax = document.querySelector('.parallax');
             if (parallax) {
                 let scrollPosition = window.pageYOffset;
@@ -1145,29 +1039,44 @@
 
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
+        const mobileMenu = document.getElementById('mobileMenu');
 
         menuToggle.addEventListener('click', function () {
-            navLinks.classList.toggle('active');
-            
-            // Animate hamburger icon
-            const spans = menuToggle.querySelectorAll('span');
-            spans[0].style.transform = navLinks.classList.contains('active') ? 'rotate(45deg) translate(5px, 5px)' : 'none';
-            spans[1].style.opacity = navLinks.classList.contains('active') ? '0' : '1';
-            spans[2].style.transform = navLinks.classList.contains('active') ? 'rotate(-45deg) translate(7px, -6px)' : 'none';
+            mobileMenu.classList.toggle('active');
         });
 
         // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-links a, .nav-links button').forEach(link => {
+        document.querySelectorAll('.mobile-menu-btn').forEach(link => {
             link.addEventListener('click', () => {
-                if(window.innerWidth <= 768) {
-                    navLinks.classList.remove('active');
-                    const spans = menuToggle.querySelectorAll('span');
-                    spans[0].style.transform = 'none';
-                    spans[1].style.opacity = '1';
-                    spans[2].style.transform = 'none';
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
+        });
+
+        // Form Submission (Basic)
+        document.querySelector('.contact form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+
+        document.querySelector('.subscribe-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Thank you for subscribing!');
+            this.reset();
         });
     </script>
 </body>
