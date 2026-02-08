@@ -1,3 +1,5 @@
+@use('Illuminate\Support\Facades\Storage')
+
 <x-usernav>
     <div class="container mx-auto p-4">
         @if (session('success'))
@@ -5,10 +7,12 @@
                 {{ session('success') }}
             </div>
         @endif
+
         <div class="flex flex-col md:flex-row gap-8 bg-white rounded-xl shadow-lg p-6">
             <div class="md:w-1/2">
                 @if ($food->image)
-                    <img src="{{ asset('storage/' . $food->image) }}" alt="{{ $food->name }}"
+                    {{-- UPDATED: Pointing to Supabase cloud storage --}}
+                    <img src="{{ Storage::disk('supabase')->url($food->image) }}" alt="{{ $food->name }}"
                         class="w-full h-auto rounded-lg shadow-md object-cover max-h-[400px]">
                 @else
                     <div class="w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500 rounded-lg">
@@ -16,12 +20,14 @@
                     </div>
                 @endif
             </div>
+
             <div class="md:w-1/2 flex flex-col justify-between">
                 <div>
                     <h1 class="text-4xl font-bold mb-4 text-[#2a2a2a] font-merriweather">{{ $food->name }}</h1>
                     <p class="text-xl text-[#ff4500] mb-4">KES {{ number_format($food->price, 2) }}</p>
                     <p class="text-lg text-[#828181] mb-6">{{ $food->description }}</p>
                 </div>
+
                 <div>
                     <form action="{{ route('cart.add', $food->id) }}" method="POST">
                         @csrf

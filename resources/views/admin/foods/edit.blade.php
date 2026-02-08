@@ -66,7 +66,7 @@
             @if ($food->image)
                 <div class="mb-4">
                     <label class="block text-gray-700 font-bold mb-2">Current Image</label>
-                    <img src="{{ asset('storage/' . $food->image) }}" alt="Food Image" class="w-40 h-40 object-cover rounded-lg">
+                    <img src="{{ Storage::disk('supabase')->url($food->image) }}" alt="Food Image" class="w-40 h-40 object-cover rounded-lg">
                 </div>
             @endif
 

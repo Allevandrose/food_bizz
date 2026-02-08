@@ -1,4 +1,5 @@
-{{-- Updated index blade with Update and Delete buttons --}}
+@use('Illuminate\Support\Facades\Storage')
+
 <x-side>
     <div class="container mx-auto p-4">
         <h1 class="text-3xl font-bold mb-6 text-[#2a2a2a] font-merriweather">Our Menu</h1>
@@ -8,7 +9,8 @@
                     <div class="relative overflow-hidden">
                         <div class="w-full h-[280px] bg-gradient-to-r from-[#989797] to-[#b5b4b4] rounded-t-xl">
                             @if ($food->image)
-                                <img src="{{ asset('storage/' . $food->image) }}" alt="{{ $food->name }}"
+                                {{-- UPDATED: Now points to Supabase instead of local asset --}}
+                                <img src="{{ Storage::disk('supabase')->url($food->image) }}" alt="{{ $food->name }}"
                                     class="w-full h-full object-cover rounded-t-xl transform group-hover:scale-105 transition duration-300">
                             @else
                                 <div class="w-full h-full flex items-center justify-center text-white text-lg">
@@ -58,7 +60,10 @@
                 </div>
             @endforeach
         </div>
-        {{ $foods->links() }}
+        
+        <div class="mt-6">
+            {{ $foods->links() }}
+        </div>
     </div>
 </x-side>
 

@@ -11,7 +11,7 @@ class FoodController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin'); // ✅ Ensure only admins can access
+        $this->middleware('admin');
     }
 
     public function index(Request $request)
@@ -32,7 +32,7 @@ class FoodController extends Controller
 
     public function create()
     {
-        $categories = Category::all(); // ✅ Fetch categories for dropdown
+        $categories = Category::all();
         return view('admin.foods.create', compact('categories'));
     }
 
@@ -40,16 +40,18 @@ class FoodController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:foods,name',
-            'category_id' => 'required|exists:categories,id', // ✅ Use category_id directly
+            'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'unit' => 'required|integer|min:1',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        // ✅ Handle image upload
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('foods', 'public');
+            // CHANGE: Store in folder named after User ID on 'supabase' disk
+            // This satisfies your RLS Policy: (storage.foldername(name))[1] = auth.uid()
+            $folder = auth()->id();
+            $validated['image'] = $request->file('image')->store($folder, 'supabase');
         }
 
         Food::create($validated);
@@ -59,7 +61,7 @@ class FoodController extends Controller
 
     public function edit(Food $food)
     {
-        $categories = Category::all(); // ✅ Fetch categories for dropdown
+        $categories = Category::all();
         return view('admin.foods.edit', compact('food', 'categories'));
     }
 
@@ -67,19 +69,22 @@ class FoodController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:foods,name,' . $food->id,
-            'category_id' => 'required|exists:categories,id', // ✅ Use category_id directly
+            'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'unit' => 'required|integer|min:1',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        // ✅ Handle image update
         if ($request->hasFile('image')) {
+            // CHANGE: Delete old image from 'supabase'
             if ($food->image) {
-                Storage::disk('public')->delete($food->image);
+                Storage::disk('supabase')->delete($food->image);
             }
-            $validated['image'] = $request->file('image')->store('foods', 'public');
+
+            // CHANGE: Store new image in User ID folder on 'supabase'
+            $folder = auth()->id();
+            $validated['image'] = $request->file('image')->store($folder, 'supabase');
         }
 
         $food->update($validated);
@@ -89,8 +94,9 @@ class FoodController extends Controller
 
     public function destroy(Food $food)
     {
+        // CHANGE: Delete from 'supabase' disk
         if ($food->image) {
-            Storage::disk('public')->delete($food->image);
+            Storage::disk('supabase')->delete($food->image);
         }
 
         $food->delete();
